@@ -14,31 +14,25 @@ def create_file_location_dictionary(path):
 
 
 def find_duplicates(file_location_dictionary):
-    for file_name, file_location in file_location_dictionary.items():
-        if len(file_location_dictionary[file_name]) <= 1:
+    for file_name, file_locations in file_location_dictionary.items():
+        if len(file_locations) <= 1:
             file_location_dictionary.pop(file_name)
     return file_location_dictionary
 
 
-def create_duplicates_message(duplicates):
-    duplicates_message = ''
-    for file_name, file_location in duplicates.items():
-        duplicates_message += 'File name: {}\nCount of copies: {}\nLocation: \n{} \n\n'.format(
-            file_name,
-            len(file_location),
-            '\n'.join(file_location)
-        )
-    return duplicates_message
-
 if __name__ == '__main__':
     try:
-        path_to_dir = 'G:\devman\dup_test'
+        path_to_dir = sys.argv[1]
         if not bool(os.path.isdir(path_to_dir)):
-            print('Please enter correct path to folder')
-            sys.exit()
+            sys.exit('Please enter correct path to folder')
         print('Duplicates:\n')
         file_location_dictionary = create_file_location_dictionary(path_to_dir)
         duplicates = find_duplicates(file_location_dictionary)
-        print(create_duplicates_message(duplicates))
+        for file_name, file_locations in duplicates.items():
+            print('File name: {}\nCount of copies: {}\nLocation: \n{} \n\n'.format(
+                file_name,
+                len(file_locations),
+                '\n'.join(file_locations)
+            ))
     except IndexError:
         print('Please, enter path to folder.')
