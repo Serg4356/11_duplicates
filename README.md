@@ -18,8 +18,23 @@ Example of programm output:
 
 ``` bash
 
-$ python duplicates.py C:\devman\duplicates_test
-File name: bars.txt| size: 4096 | Count of copies:  3 | Location:  ['C:\\devman\\duplicates_test', 'C:\\devman\\duplicates_test\\duplicates', 'C:\\devman\\duplicates_test\\duplicates\\duplicates2']
+$ python duplicates.py G:\devman\dup_test
+Duplicates:
+
+File name: 1.txt
+Size: 67
+Count of copies: 3
+Location: 
+G:\devman\dup_test
+G:\devman\dup_test\some_folder
+G:\devman\dup_test\some_folder2
+
+File name: bars.txt
+Size: 413166
+Count of copies: 2
+Location: 
+G:\devman\dup_test
+G:\devman\dup_test\some_folder2
 
 ```
 
