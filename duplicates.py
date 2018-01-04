@@ -3,21 +3,14 @@ import sys
 
 
 def create_file_location_dictionary(path):
-    file_location_dictionary = {}
+    files_location_dictionary = {}
     for file_paths, dirs, files in os.walk(path):
         for file_name in files:
             file_location = '{}\nSize: {}'.format(
                 file_name,
-                str(os.path.getsize('{}\\{}'.format(file_paths, file_name))))
-            file_location_dictionary.setdefault(file_location,[]).append(file_paths)
-    return file_location_dictionary
-
-
-def find_duplicates(file_location_dictionary):
-    for file_name, file_locations in file_location_dictionary.items():
-        if len(file_locations) <= 1:
-            file_location_dictionary.pop(file_name)
-    return file_location_dictionary
+                str(os.path.getsize(os.path.join(file_paths, file_name))))
+            files_location_dictionary.setdefault(file_location,[]).append(file_paths)
+    return files_location_dictionary
 
 
 if __name__ == '__main__':
@@ -27,12 +20,12 @@ if __name__ == '__main__':
             sys.exit('Please enter correct path to folder')
         print('Duplicates:\n')
         file_location_dictionary = create_file_location_dictionary(path_to_dir)
-        duplicates = find_duplicates(file_location_dictionary)
-        for file_name, file_locations in duplicates.items():
-            print('File name: {}\nCount of copies: {}\nLocation: \n{} \n\n'.format(
-                file_name,
-                len(file_locations),
-                '\n'.join(file_locations)
-            ))
+        for file_name, file_locations in file_location_dictionary.items():
+            if len(file_locations) > 1:
+                print('File name: {}\nCount of copies: {}\nLocation: \n{} \n\n'.format(
+                    file_name,
+                    len(file_locations),
+                    '\n'.join(file_locations)
+                ))
     except IndexError:
         print('Please, enter path to folder.')
