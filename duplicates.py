@@ -2,7 +2,7 @@ import os
 import sys
 
 
-def create_file_location_dictionary(path):
+def create_files_location_dictionary(path):
     files_location_dictionary = {}
     for file_paths, dirs, files in os.walk(path):
         for file_name in files:
@@ -13,9 +13,9 @@ def create_file_location_dictionary(path):
     return files_location_dictionary
 
 
-def create_duplicates_message(file_location_dictionary):
+def create_duplicates_message(files_location_dictionary):
     duplicates_message = ''
-    for file_name, file_locations in file_location_dictionary.items():
+    for file_name, file_locations in files_location_dictionary.items():
         if len(file_locations) > 1:
             duplicates_message += 'File name: {}\nCount of copies: {}\nLocation: \n{} \n\n'.format(
                 file_name,
@@ -31,7 +31,7 @@ if __name__ == '__main__':
         if not os.path.isdir(path_to_dir):
             sys.exit('Please enter correct path to folder')
         print('Duplicates:\n')
-        file_location_dictionary = create_file_location_dictionary(path_to_dir)
-        print(create_duplicates_message(file_location_dictionary))
+        files_location_dictionary = create_files_location_dictionary(path_to_dir)
+        print(create_duplicates_message(files_location_dictionary))
     except IndexError:
         print('Please, enter path to folder.')
