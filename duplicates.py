@@ -13,7 +13,7 @@ def create_files_location_dictionary(path):
     return files_location_dictionary
 
 
-def create_duplicates_message(files_location_dictionary):
+def print_duplicates(files_location_dictionary):
     for file_name, file_locations in files_location_dictionary.items():
         if len(file_locations) > 1:
             print('File name: {}\nCount of copies: {}\nLocation: \n{} \n\n'.format(
@@ -30,6 +30,6 @@ if __name__ == '__main__':
             sys.exit('Please enter correct path to folder')
         print('Duplicates:\n')
         files_location_dictionary = create_files_location_dictionary(path_to_dir)
-        create_duplicates_message(files_location_dictionary)
+        print_duplicates(files_location_dictionary)
     except IndexError:
         print('Please, enter path to folder.')
